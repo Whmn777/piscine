@@ -1,0 +1,68 @@
+{% extends 'EventCreator/base.html.twig' %}
+
+{% block title %}
+    Home EventCreator
+{% endblock title %}
+
+{% block header %}
+        <header style="background-image: url('{{ asset('assets/img/envoiArgent2.jpg')}}')";>
+
+            <nav class="d-flex space-around">
+                <div class="logo">
+                    <a href="">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="resp">
+                    </a>
+                </div>
+                <form action="{{ path('EventCreator_search_events') }}" class="search-form-events">
+                    <input type="text" name="search" placeholder="Rechercher" class="btn-light search">
+                </form>
+
+
+                <ul class="d-flex space-around align-items">
+                    <li> <a href="">Mes amis</a></li>
+                    <li> <a href=""> Mes événements</a></li>
+                    <li> <a href=""> Mes Particpations</a></li>
+                </ul>
+            </nav>
+        </header>
+{% endblock header %}
+
+{% block main %}
+
+    <div>
+        {# La fonction path() : permet d'établir un LIEN :
+            elle prend pour argument:
+            1=> D'abord le name de la route;
+            2=> Un objet définit par les valeurs = event.id de la wildcard = id , à inclure dans l’url (avec href). #}
+        <a href="{{ path('EventCreator_event_insert') }}" class="btn btn-info btn-lg m-3">
+            <span class="glyphicon glyphicon-plus"></span> Céer un événement
+        </a>
+    </div>
+
+    <article class="article">
+
+        {% if events|length>0 %}
+
+                {% for event in events %}
+                    <div class="article">
+                        <a href="{{ path('EventCreator_event_show', {'id': event.id}) }}">
+                            <h2>{{event.nom}}</h2>
+
+                            {% if event.category%}
+                                <p>{{ event.category.nom }}</p>
+                            {% endif %}
+
+
+                        </a>
+                        <div ><img src="{{ asset('uploads/images/'~event.image)}}" alt="{{ event.nom }}" class="resp"></div>
+                        <p>Aura lieu le {{ event.AuraLieu|date('d/m/Y') }}</p>
+                    </div>
+
+                {% endfor %}
+
+        {% endif %}
+
+    </article>
+
+
+{% endblock main %}

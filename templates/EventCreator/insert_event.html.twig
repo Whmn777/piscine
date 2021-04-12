@@ -1,0 +1,108 @@
+{% extends 'EventCreator/base.html.twig' %}
+
+{% block title %}
+    Formulaire d'ajout d'événements
+{% endblock title %}
+
+{% block header %}
+    <header style="background-image: url('{{ asset('assets/img/listevents.jpg')}}')";>
+
+        <nav class="d-flex space-around">
+            <div class="logo">
+                <a href="">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="resp">
+                </a>
+            </div>
+            <form action="{{ path('EventCreator_search_events') }}" class="search-form-events search ">
+                <input type="text" name="search" placeholder="Rechercher" class="btn-light">
+            </form>
+
+
+            <ul class="d-flex space-around align-items">
+                <li> <a href="">Mes amis</a></li>
+                <li> <a href=""> Mes événements</a></li>
+                <li> <a href=""> Mes Particpations</a></li>
+            </ul>
+        </nav>
+    </header>
+{% endblock header %}
+
+{% block main %}
+
+    {#  Avec la méthode form, j'affiche mon formulaire d'insertion d'event avec le paramètre ici :
+    eventFormView définit dans ma fonction insertArticle de mon ArticleController#}
+
+    {{ form_start(eventFormView) }}
+    <div class="form-group col_12 container d-flex column align-items-center m-5">
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.nom) }}
+        {{ form_label(eventFormView.nom) }}
+        {{ form_widget(eventFormView.nom, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.creation) }}
+        {{ form_label(eventFormView.creation) }}
+        {{ form_widget(eventFormView.creation, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.aura_lieu) }}
+        {{ form_label(eventFormView.aura_lieu) }}
+        {{ form_widget(eventFormView.aura_lieu, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.adresse) }}
+        {{ form_label(eventFormView.adresse) }}
+        {{ form_widget(eventFormView.adresse, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.code_postal) }}
+        {{ form_label(eventFormView.code_postal) }}
+        {{ form_widget(eventFormView.code_postal, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3 m-2">
+        {{ form_errors(eventFormView.ville) }}
+        {{ form_label(eventFormView.ville) }}
+        {{ form_widget(eventFormView.ville, {'attr': {'class':'form-control'}}) }}
+    </div>
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.pays) }}
+        {{ form_label(eventFormView.pays) }}
+        {{ form_widget(eventFormView.pays, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3">
+        {{ form_errors(eventFormView.description) }}
+        {{ form_label(eventFormView.description) }}
+        {{ form_widget(eventFormView.description, {'attr': {'class':'form-control'}}) }}
+    </div>
+
+    <div class="form-group col-6 col-md-4 col-lg-3 m-2">
+        {{ form_errors(eventFormView.statut_coutumier) }}
+        {{ form_label(eventFormView.statut_coutumier) }}
+
+
+        <div class="form-group col-6 col-md-4 col-lg-3 m-2">
+            {{ form_errors(eventFormView.image) }}
+            {{ form_label(eventFormView.image) }}
+            {{ form_widget(eventFormView.image, {'attr': {'class':'form-control'}}) }}
+        </div>
+
+        <div class="form-group col-6 col-md-2 col-lg-2">
+            {{ form_widget(eventFormView.Valider, {'attr': {'class':'form-submit btn btn-secondary'}}) }}
+        </div>
+
+
+
+
+    </div>
+    {{ form_end(eventFormView) }}
+
+    <a href="{{ path('EventCreator_list_events') }}">Retour aux events</a>
+
+
+{% endblock main %}

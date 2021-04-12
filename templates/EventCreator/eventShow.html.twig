@@ -1,0 +1,69 @@
+{% extends 'EventCreator/base.html.twig' %}
+
+{% block header %}
+    <header style="background-image: url('{{ asset('assets/img/homepage.jpg')}}')";>
+
+        <nav class="d-flex space-around">
+            <div class="logo">
+                <a href="">
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="logo" class="resp">
+                </a>
+            </div>
+            <form action="{{ path('EventCreator_search_events') }}" class="search-form-events search">
+                <input type="text" name="search" placeholder="Rechercher" class="btn-light search">
+            </form>
+
+
+            <ul class="d-flex space-around align-items">
+                <li> <a href="">Mes amis</a></li>
+                <li> <a href=""> Mes événements</a></li>
+                <li> <a href=""> Mes Particpations</a></li>
+            </ul>
+        </nav>
+    </header>
+{% endblock header %}
+
+{% block main %}
+
+    <section class="articles-container">
+
+            <article >
+
+                <h2 class="text_center inline-block m-5">{{ event.nom }}</h2>
+
+                <div class="d-flex justify-content-around">
+
+                    <div>
+                        <p>Crée le :{{ event.creation|date('d/m/Y') }}</p>
+                        <p>Aura lieu le :{{ event.AuraLieu|date('d/m/Y') }}</p>
+                        <p>Adresse:{{ event.adresse }}</p>
+                        <p>{{ event.CodePostal }} {{ event.ville }}</p>
+                        <p>{{ event.pays }}</p>
+                    </div>
+
+                </div>
+
+                <div>
+                    <div class="image visible"><img src="{{asset('uploads/images/'~event.image)}}" alt="{{ event.nom }}" class="img-fluid anim"></div>
+                </div>
+
+            </article>
+
+                <div class="d-flex justify-content-around">
+                    <div class="btn-group align-top">
+                        <button class="btn btn-sm btn-outline-secondary badge" type="button" data-toggle="modal" data-target="#user-form-modal">
+                            <a href="{{ path('EventCreator_update_event', {'id': event.id}) }}">Modifier</a></button>
+                        <button class="btn btn-sm btn-outline-secondary badge" type="button">
+                            <a href="{{ path('EventCreator_delete_event', {'id': event.id}) }}"><i class="fa fa-trash"></i></a>
+                        </button>
+                    </div>
+                    <div>
+                        <a href="{{ path('EventCreator_home') }}">Accueil</a>
+                    </div>
+                </div>
+
+
+
+    </section>
+
+{% endblock main %}
